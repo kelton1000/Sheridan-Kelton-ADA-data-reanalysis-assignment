@@ -1,35 +1,157 @@
 ---
-title: "SheridanADA-data-reanalysis-assignment"
+title: "Data Replication Assignment"
 author: "Kelton Sheridan"
-date: "4/13/2020"
-output: html_document
+date: "4/16/2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 ```
-#The purpose of this paper was to determine where the ceramic sherds(pieces) originated in Peru by using Instrumental Neutron Activation Analysis, which will show the source of the clay used. 
-
+The purpose of this paper was to determine where the ceramic sherds(pieces) originated in Peru by using Instrumental Neutron Activation Analysis, which will show the source of the clay used. 
 ```
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(ggplot2)
+library(tidyselect)
+library(dplyr)
+#Reading in the data from table 1 in order to make table 2
+f <- "data-reanalysis1.xlsx"
+ceramic <- read_excel(f, sheet = 1, col_names = TRUE)
+head(ceramic)
+
+summary(ceramic)
+#For all of the cells that has a less than symbol, I  made them equal to instead,
+#which may end up changing the results a tiny bit.
+#In order to create Table 2 from the article, I used group_by and summarize to find
+#the means.
+s <- group_by(ceramic, Site) %>%
+  summarize(
+  meanAL = mean(Al),
+  meanCA = mean(Ca),
+  meanDy = mean(Dy),
+  meanMn = mean(Mn),
+  meanTi = mean(Ti),
+  meanV = mean(V),
+  meanK = mean(K),
+  meanNa = mean(Na),
+  meanAs = mean(As), 
+  meanU = mean(U),
+  meanLa = mean(La),
+  meanYb = mean(Yb),
+  meanSb = mean(Sb), 
+  meanSm = mean(Sm), 
+  meanBa = mean(Ba),
+  meanCe = mean(Ce),
+  meanCo = mean(Co),
+  meanCr = mean(Cr),
+  meanCs = mean(Cs),
+  meanEu = mean(Eu),
+  meanFe = mean(Fe),
+  meanTb = mean(Tb),
+  meanNd = mean(Nd),
+  meanNi = mean(Ni),
+  meanSc = mean(Sc),
+  meanSr = mean(Sr),
+  meanTa = mean(Ta),
+  meanTh = mean(Th),
+  meanHf = mean(Hf)
+  )
+  s
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Neutron Activation Analysis of Inca and Colonial Ceramics
+## from Central Highland Ecuador
 
 ```{r cars}
-summary(cars)
+library(readxl)
+library(ggplot2)
+library(tidyselect)
+library(dplyr)
+#Reading in the data from table 1 in order to make table 2
+f <- "data-reanalysis1.xlsx"
+ceramic <- read_excel(f, sheet = 1, col_names = TRUE)
+head(ceramic)
+
+summary(ceramic)
+#For all of the cells that has a less than symbol, I  made them equal to instead,
+#which may end up changing the results a tiny bit.
+#In order to create Table 2 from the article, I used group_by and summarize to find
+#the means.
+s <- group_by(ceramic, Site) %>%
+  summarize(
+  meanAL = mean(Al),
+  meanCA = mean(Ca),
+  meanDy = mean(Dy),
+  meanMn = mean(Mn),
+  meanTi = mean(Ti),
+  meanV = mean(V),
+  meanK = mean(K),
+  meanNa = mean(Na),
+  meanAs = mean(As), 
+  meanU = mean(U),
+  meanLa = mean(La),
+  meanYb = mean(Yb),
+  meanSb = mean(Sb), 
+  meanSm = mean(Sm), 
+  meanBa = mean(Ba),
+  meanCe = mean(Ce),
+  meanCo = mean(Co),
+  meanCr = mean(Cr),
+  meanCs = mean(Cs),
+  meanEu = mean(Eu),
+  meanFe = mean(Fe),
+  meanTb = mean(Tb),
+  meanNd = mean(Nd),
+  meanNi = mean(Ni),
+  meanSc = mean(Sc),
+  meanSr = mean(Sr),
+  meanTa = mean(Ta),
+  meanTh = mean(Th),
+  meanHf = mean(Hf)
+  )
+  s
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
+## Figure 4
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+#In order to create the visual for Figure 4, I used ggplot, specifically to 
+#create a scatterplot. Then I added specific shapes to more easily 
+#distinguish each group (scale_shape_manual), and I also changed the colors, and
+#added a title. I also added a bit to center the title too. 
+names(ceramic)
+ggplot(data = ceramic, aes(
+  x = Cs, 
+  y = Ca,
+  color = Site,
+  group = Site,
+)) + geom_point(aes(shape = Site))+
+  scale_shape_manual(values=c(3, 5, 15, 16, 17, 18))+
+  ggtitle("NAA of Inca and Colonial Ceramics \nfrom Central Highland Ecuador")+
+  theme(plot.title = element_text(hjust = 0.5))
 ```
+
+## Figure 6
+```{r pressures, echo=FALSE}
+#In order to create the visual for Figure 6, I used ggplot, specifically to 
+#create a scatterplot. Then I added specific shapes to more easily 
+#distinguish each group (scale_shape_manual), and I also changed the colors, and
+#added a title. 
+names(ceramic)
+ggplot(data = ceramic, aes(
+  x = Cr, 
+  y = Yb,
+  color = Site,
+  group = Site
+)) + geom_point(aes(shape = Site))+
+  scale_shape_manual(values=c(3, 5, 15, 16, 17, 18))+
+  ggtitle("NAA of Inca and Colonial Ceramics \nfrom Central Highland Ecuador")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

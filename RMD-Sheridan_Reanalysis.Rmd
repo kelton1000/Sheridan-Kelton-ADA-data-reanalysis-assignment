@@ -10,7 +10,9 @@ output:
 ```
 The purpose of this paper is to determine where the ceramic sherds(pieces) originated in Ecuador by using Neutron Activation Analysis (NAA). NAA is an chemical analysis that determines the elemental compositions of clay in ceramic sherds. By using this analytical method, it is possible to determine the production centers of these samples of sherds. 
 
-In my github repo, I have included the scraped table data from the article (data-reanalysis1.xlsx) as well as the two figures I have replicated (Figure4_ADA & Figure6_ADA).
+The analyses I replicated was recreating the two bivariate scatterplots, Figures 4 & 6, which are pretty basic plotting the number of sherds that contain Calcium and Caesium (Fig. 4) and Ytterbium and Chromium (Fig. 6). The clustering of artifacts that contain these elements can indicate certain sites that may have manufactured these ceramics. From both figures , it looks like Cuenca, Quito, and Riobamba were the three main manufacturing sites.
+
+In my github repo, I have included the scraped table data from the arttcle (data-reanalysis1.xlsx) as well as the two figures I have replicated (Figure4_ADA & Figure6_ADA).
 ```
 
 
